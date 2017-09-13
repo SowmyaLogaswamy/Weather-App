@@ -1,5 +1,7 @@
 package com.example.guest.weatherapp;
 
+import android.util.Log;
+
 import okhttp3.Call;
 import okhttp3.Callback;
 import okhttp3.HttpUrl;
@@ -24,6 +26,8 @@ public class OpenWeatherService {
                 .addQueryParameter(Constants.OPEN_WEATHER_APP_ID_PARAMETER, Constants.OPEN_WEATHER_APP_ID );
 
         String url = urlBuilder.build().toString();
+
+        Log.v("Url looks like this: ", url);
 
         Request request= new Request.Builder()
                 .url(url)
