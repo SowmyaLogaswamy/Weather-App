@@ -10,7 +10,15 @@
         android:layout_height="wrap_content"
         android:text="7 day forecast for "
         android:id="@+id/locationTextView"
-        android:layout_centerVertical="true"
+        android:layout_centerVertical="false"
         android:layout_centerHorizontal="true" />
+
+    <ListView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/forecastListView"
+        android:layout_below="@+id/locationTextView"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true" />
 
 </RelativeLayout>
