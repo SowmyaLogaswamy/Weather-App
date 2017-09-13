@@ -1,23 +1,30 @@
 package com.example.guest.weatherapp;
 
 import android.content.Intent;
+import android.graphics.Typeface;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 
 
 public class MainActivity extends AppCompatActivity {
 
     private Button mGetForecastButton;
     private EditText mLocationEditText;
+    private TextView mWeatherMainTextView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        mWeatherMainTextView = (TextView) findViewById(R.id.weatherMainTextView);
+        Typeface ostrichFont = Typeface.createFromAsset(getAssets(), "fonts/sansation-bold.ttf");
+        mWeatherMainTextView.setTypeface(ostrichFont);
 
         mLocationEditText = (EditText) findViewById(R.id.locationEditText);
         mGetForecastButton = (Button) findViewById(R.id.getForecastButton);
