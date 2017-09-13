@@ -13,7 +13,7 @@ import butterknife.Bind;
 import butterknife.ButterKnife;
 
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements View.OnClickListener{
 
     @Bind(R.id.getForecastButton) Button mGetForecastButton;
     @Bind(R.id.locationEditText) EditText mLocationEditText;
@@ -26,21 +26,21 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
 
-
         Typeface ostrichFont = Typeface.createFromAsset(getAssets(), "fonts/sansation-bold.ttf");
         mWeatherMainTextView.setTypeface(ostrichFont);
 
-
         mGetForecastButton.setTransformationMethod(null);
+        mGetForecastButton.setOnClickListener(this);
 
-        mGetForecastButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                String location = mLocationEditText.getText().toString();
-                Intent intent = new Intent(MainActivity.this, ForecastActivity.class);
-                intent.putExtra("location", location);
-                startActivity(intent);
-            }
-        });
     }
+    @Override
+    public void onClick(View v) {
+        if(v == mGetForecastButton) {
+            String location = mLocationEditText.getText().toString();
+            Intent intent = new Intent(MainActivity.this, ForecastActivity.class);
+            intent.putExtra("location", location);
+            startActivity(intent);
+        }
+    }
+
 }
