@@ -9,25 +9,28 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import butterknife.Bind;
+import butterknife.ButterKnife;
+
 
 public class MainActivity extends AppCompatActivity {
 
-    private Button mGetForecastButton;
-    private EditText mLocationEditText;
-    private TextView mWeatherMainTextView;
+    @Bind(R.id.getForecastButton) Button mGetForecastButton;
+    @Bind(R.id.locationEditText) EditText mLocationEditText;
+    @Bind(R.id.weatherMainTextView) TextView mWeatherMainTextView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        ButterKnife.bind(this);
 
-        mWeatherMainTextView = (TextView) findViewById(R.id.weatherMainTextView);
+
         Typeface ostrichFont = Typeface.createFromAsset(getAssets(), "fonts/sansation-bold.ttf");
         mWeatherMainTextView.setTypeface(ostrichFont);
 
-        mLocationEditText = (EditText) findViewById(R.id.locationEditText);
-        mGetForecastButton = (Button) findViewById(R.id.getForecastButton);
+
         mGetForecastButton.setTransformationMethod(null);
 
         mGetForecastButton.setOnClickListener(new View.OnClickListener() {

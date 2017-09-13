@@ -10,22 +10,26 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import butterknife.Bind;
+import butterknife.ButterKnife;
+
 public class ForecastActivity extends AppCompatActivity {
-    private TextView mLocationTextView;
-    private ListView mForecastListView;
+    @Bind(R.id.locationTextView) TextView mLocationTextView;
+    @Bind(R.id.forecastListView) ListView mForecastListView;
     private String[] forecast =new String[]{
-            "Day 1", "Day 2", "Day 3", "Day 4", "Day 5", "Day 6", "Day 7"};
+            "Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"};
+    private String[] conditions =new String[]{
+            "sunny", "partly cloudy", "sunny", "fog", "smoky", "unbearable", "rainy"};
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_forecast);
+        ButterKnife.bind(this);
 
-        mForecastListView = (ListView) findViewById(R.id.forecastListView);
-        mLocationTextView = (TextView) findViewById(R.id.locationTextView);
 
-        ArrayAdapter adapter = new ArrayAdapter(this, android.R.layout.simple_list_item_1, forecast);
+        MyForecastArrayAdapter adapter = new MyForecastArrayAdapter(this, android.R.layout.simple_list_item_1, forecast, conditions);
         mForecastListView.setAdapter(adapter);
 
 
