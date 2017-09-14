@@ -10,7 +10,9 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.IOException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 
 import okhttp3.Call;
 import okhttp3.Callback;
@@ -62,8 +64,11 @@ public class OpenWeatherService {
                     double tempDay = forecastDayJSON.getJSONObject("temp").getDouble("day");
 
                     long timestamp = forecastDayJSON.getLong("dt");
+                    Date date = new Date(timestamp*1000L);
+                    SimpleDateFormat sdf = new SimpleDateFormat("EEEE, dd MMMM");
+                    String formattedDate = sdf.format(date);
 
-                    ForecastDay forecastDay = new ForecastDay(tempDay, timestamp);
+                    ForecastDay forecastDay = new ForecastDay(tempDay, formattedDate);
                     forecast.add(forecastDay);
                 }
             }

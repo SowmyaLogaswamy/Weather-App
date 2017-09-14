@@ -6,17 +6,17 @@ package com.example.guest.weatherapp.models;
 
 public class ForecastDay {
     private double mTempDay;
-    private long mTimestamp;
+    private String mFormattedDate;
 
-    public ForecastDay(double tempDay, long timestamp) {
+    public ForecastDay(double tempDay, String formattedDate) {
 
         this.mTempDay = tempDay;
-        this.mTimestamp = timestamp;
+        this.mFormattedDate = formattedDate;
     }
 
     public double getTempDay() {
         return mTempDay;
     }
 
-    public long getTimestamp() { return mTimestamp; }
+    public String getFormattedDate() { return mFormattedDate; }
 }

@@ -67,7 +67,7 @@ public class ForecastListAdapter extends RecyclerView.Adapter<ForecastListAdapte
 
         public void bindForecastDay(ForecastDay forecastDay) {
 
-            mDayTextView.setText("Forecast for: " + forecastDay.getTimestamp());
+            mDayTextView.setText("Forecast for: " + forecastDay.getFormattedDate());
             mTempDayTextView.setText("Temperature : " + forecastDay.getTempDay());
 
         }
