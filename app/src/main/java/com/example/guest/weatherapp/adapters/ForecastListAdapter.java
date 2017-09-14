@@ -11,6 +11,8 @@ import android.widget.TextView;
 import com.example.guest.weatherapp.R;
 import com.example.guest.weatherapp.models.ForecastDay;
 
+import org.w3c.dom.Text;
+
 import java.util.ArrayList;
 
 import butterknife.Bind;
@@ -53,6 +55,7 @@ public class ForecastListAdapter extends RecyclerView.Adapter<ForecastListAdapte
 
     public class ForecastDayViewHolder extends RecyclerView.ViewHolder {
         @Bind(R.id.tempDayTextView) TextView mTempDayTextView;
+        @Bind(R.id.dayTextView) TextView mDayTextView;
         private Context mContext;
 
         public ForecastDayViewHolder(View itemView) {
@@ -63,7 +66,10 @@ public class ForecastListAdapter extends RecyclerView.Adapter<ForecastListAdapte
         }
 
         public void bindForecastDay(ForecastDay forecastDay) {
-            mTempDayTextView.setText("Daily Temperature Forecast: " + forecastDay.getTempDay());
+
+            mDayTextView.setText("Forecast for: " + forecastDay.getTimestamp());
+            mTempDayTextView.setText("Temperature : " + forecastDay.getTempDay());
+
         }
     }
 

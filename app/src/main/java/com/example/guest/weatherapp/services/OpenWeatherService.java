@@ -58,8 +58,12 @@ public class OpenWeatherService {
                 JSONArray forecastJSON = openWeatherJSON.getJSONArray("list");
                 for (int i = 0; i < forecastJSON.length(); i++) {
                     JSONObject forecastDayJSON = forecastJSON.getJSONObject(i);
+
                     double tempDay = forecastDayJSON.getJSONObject("temp").getDouble("day");
-                    ForecastDay forecastDay = new ForecastDay(tempDay);
+
+                    long timestamp = forecastDayJSON.getLong("dt");
+
+                    ForecastDay forecastDay = new ForecastDay(tempDay, timestamp);
                     forecast.add(forecastDay);
                 }
             }
