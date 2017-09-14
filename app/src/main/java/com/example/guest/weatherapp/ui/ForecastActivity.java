@@ -28,11 +28,12 @@ public class ForecastActivity extends AppCompatActivity {
     public static final String TAG = ForecastActivity.class.getSimpleName();
 
     @Bind(R.id.recyclerView) RecyclerView mRecyclerView;
-
+    @Bind(R.id.locationTextView) TextView mLocationTextView;
 
     private ForecastListAdapter mAdapter;
 
     public ArrayList<ForecastDay> mForecast = new ArrayList<>();
+    public String mCityName = new String();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,8 +43,8 @@ public class ForecastActivity extends AppCompatActivity {
 
         Intent intent = getIntent();
         String location = intent.getStringExtra("location");
-
         getForecast(location);
+
     }
 
     private void getForecast(String location) {
@@ -59,17 +60,19 @@ public class ForecastActivity extends AppCompatActivity {
             @Override
             public void onResponse(Call call, Response response) {
                 mForecast = openWeatherService.processResults(response);
-
+//                mCityName = openWeatherService.processCityName(response);
+                String mCityName = "A city";
                 ForecastActivity.this.runOnUiThread(new Runnable() {
 
                     @Override
                     public void run() {
                         mAdapter = new ForecastListAdapter(getApplicationContext(), mForecast);
                         mRecyclerView.setAdapter(mAdapter);
-                        RecyclerView.LayoutManager layoutManager =
-                                new LinearLayoutManager(ForecastActivity.this);
+                        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(ForecastActivity.this);
                         mRecyclerView.setLayoutManager(layoutManager);
                         mRecyclerView.setHasFixedSize(true);
+
+                        mLocationTextView.setText("Here is the forecast for " + mForecast.get(0).getCityName());
                     }
                 });
             }

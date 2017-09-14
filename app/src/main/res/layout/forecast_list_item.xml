@@ -1,24 +1,26 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="wrap_content">
-
-
-
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="8dp"
+    android:layout_marginHorizontal="16dp"
+    android:layout_marginVertical="16dp"
+    android:background="@drawable/customborder"
+    android:orientation="vertical">
 
 
     <TextView
+        android:id="@+id/dayTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/dayTextView"
-        android:text="Day of Week"
-         />
+        android:text="Day of Week" />
 
     <TextView
+        android:id="@+id/tempDayTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/dayTextView"
-        android:id="@+id/tempDayTextView"
         android:text="Daily Temperature"
 
         />

@@ -26,6 +26,7 @@ import okhttp3.Response;
  */
 
 public class OpenWeatherService {
+    public static final String TAG = OpenWeatherService.class.getSimpleName();
 
     public static void findForecast(String location, Callback callback) {
         OkHttpClient client = new OkHttpClient.Builder().
@@ -58,6 +59,10 @@ public class OpenWeatherService {
             if (response.isSuccessful()) {
                 JSONObject openWeatherJSON = new JSONObject(jsonData);
                 JSONArray forecastJSON = openWeatherJSON.getJSONArray("list");
+                String cityName = openWeatherJSON.getJSONObject("city").getString("name");
+                Log.v(TAG, cityName);
+
+
                 for (int i = 0; i < forecastJSON.length(); i++) {
                     JSONObject forecastDayJSON = forecastJSON.getJSONObject(i);
 
@@ -68,7 +73,7 @@ public class OpenWeatherService {
                     SimpleDateFormat sdf = new SimpleDateFormat("EEEE, dd MMMM");
                     String formattedDate = sdf.format(date);
 
-                    ForecastDay forecastDay = new ForecastDay(tempDay, formattedDate);
+                    ForecastDay forecastDay = new ForecastDay(cityName, tempDay, formattedDate);
                     forecast.add(forecastDay);
                 }
             }
@@ -80,4 +85,23 @@ public class OpenWeatherService {
         }
         return forecast;
     }
+
+//    public String processCityName(Response response) {
+//        String cityName = "";
+//
+//        try {
+//            String jsonData = response.body().string();
+//            if (response.isSuccessful()) {
+//                JSONObject openWeatherJSON = new JSONObject(jsonData);
+//                cityName += openWeatherJSON.getJSONObject("city").getString("name");
+//            }
+//
+//        } catch (IOException e){
+//            e.printStackTrace();
+//        } catch (JSONException e){
+//            e.printStackTrace();
+//        }
+//
+//        return cityName;
+//    }
 }
