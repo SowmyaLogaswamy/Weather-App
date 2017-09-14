@@ -1,17 +1,15 @@
 package com.example.guest.weatherapp;
 
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
-import android.view.View;
-import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -25,10 +23,11 @@ public class ForecastActivity extends AppCompatActivity {
 
     @Bind(R.id.locationTextView) TextView mLocationTextView;
     @Bind(R.id.forecastListView) ListView mForecastListView;
-    private String[] forecast =new String[]{
-            "Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"};
-    private String[] conditions =new String[]{
-            "sunny", "partly cloudy", "sunny", "fog", "smoky", "unbearable", "rainy"};
+//    private String[] forecast =new String[]{
+//            "Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"};
+//    private String[] conditions =new String[]{
+//            "sunny", "partly cloudy", "sunny", "fog", "smoky", "unbearable", "rainy"};
+    public ArrayList<ForecastDay> mForecast = new ArrayList<>();
 
 
     @Override
@@ -38,17 +37,17 @@ public class ForecastActivity extends AppCompatActivity {
         ButterKnife.bind(this);
 
 
-        MyForecastArrayAdapter adapter = new MyForecastArrayAdapter(this, android.R.layout.simple_list_item_1, forecast, conditions);
-        mForecastListView.setAdapter(adapter);
+//        MyForecastArrayAdapter adapter = new MyForecastArrayAdapter(this, android.R.layout.simple_list_item_1, forecast, conditions);
+//        mForecastListView.setAdapter(adapter);
 
 
-        mForecastListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                String forecastString = ((TextView) view).getText().toString();
-                Toast.makeText(ForecastActivity.this, forecastString, Toast.LENGTH_LONG).show();
-            }
-        });
+//        mForecastListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+//            @Override
+//            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+//                String forecastString = ((TextView) view).getText().toString();
+//                Toast.makeText(ForecastActivity.this, forecastString, Toast.LENGTH_LONG).show();
+//            }
+//        });
 
 
         Intent intent = getIntent();
@@ -69,13 +68,26 @@ public class ForecastActivity extends AppCompatActivity {
             }
 
             @Override
-            public void onResponse(Call call, Response response) throws IOException {
-                try {
-                    String jsonData = response.body().string();
-                    Log.v(TAG, jsonData);
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
+            public void onResponse(Call call, Response response) {
+                mForecast = openWeatherService.processResults(response);
+
+                ForecastActivity.this.runOnUiThread(new Runnable() {
+
+                    @Override
+                    public void run() {
+                        Double[] tempDays = new Double[mForecast.size()];
+                        for (int i = 0; i < tempDays.length; i++) {
+                            tempDays[i] = mForecast.get(i).getTempDay();
+                        }
+
+                        ArrayAdapter adapter = new ArrayAdapter(ForecastActivity.this, android.R.layout.simple_list_item_1, tempDays);
+                        mForecastListView.setAdapter(adapter);
+
+                        for (ForecastDay forecastDay : mForecast) {
+                            Log.d(TAG, "Daily Temp: " + forecastDay.getTempDay());
+                        }
+                    }
+                });
             }
 
 

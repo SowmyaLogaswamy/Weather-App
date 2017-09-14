@@ -2,11 +2,19 @@ package com.example.guest.weatherapp;
 
 import android.util.Log;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.io.IOException;
+import java.util.ArrayList;
+
 import okhttp3.Call;
 import okhttp3.Callback;
 import okhttp3.HttpUrl;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
+import okhttp3.Response;
 
 /**
  * Created by Guest on 9/13/17.
@@ -35,5 +43,29 @@ public class OpenWeatherService {
 
         Call call = client.newCall(request);
         call.enqueue(callback);
+    }
+
+    public ArrayList<ForecastDay> processResults(Response response) {
+        ArrayList<ForecastDay> forecast = new ArrayList<>();
+
+        try {
+            String jsonData = response.body().string();
+            if (response.isSuccessful()) {
+                JSONObject openWeatherJSON = new JSONObject(jsonData);
+                JSONArray forecastJSON = openWeatherJSON.getJSONArray("list");
+                for (int i = 0; i < forecastJSON.length(); i++) {
+                    JSONObject forecastDayJSON = forecastJSON.getJSONObject(i);
+                    double tempDay = forecastDayJSON.getJSONObject("temp").getDouble("day");
+                    ForecastDay forecastDay = new ForecastDay(tempDay);
+                    forecast.add(forecastDay);
+                }
+            }
+
+        } catch (IOException e){
+            e.printStackTrace();
+        } catch (JSONException e){
+            e.printStackTrace();
+        }
+        return forecast;
     }
 }
