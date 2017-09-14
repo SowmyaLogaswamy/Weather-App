@@ -3,6 +3,8 @@ package com.example.guest.weatherapp;
 import android.os.Build;
 import android.widget.ListView;
 
+import com.example.guest.weatherapp.ui.ForecastActivity;
+
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;

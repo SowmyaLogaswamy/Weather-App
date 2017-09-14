@@ -5,7 +5,7 @@
     android:layout_height="match_parent"
 
     android:background="#000000"
-    tools:context="com.example.guest.weatherapp.MainActivity">
+    tools:context="com.example.guest.weatherapp.ui.MainActivity">
 
     <ImageView
         android:layout_width="wrap_content"

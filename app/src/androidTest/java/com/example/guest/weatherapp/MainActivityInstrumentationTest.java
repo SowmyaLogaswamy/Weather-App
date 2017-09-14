@@ -2,6 +2,8 @@ package com.example.guest.weatherapp;
 
 import android.support.test.rule.ActivityTestRule;
 
+import com.example.guest.weatherapp.ui.MainActivity;
+
 import org.junit.Rule;
 import org.junit.Test;
 

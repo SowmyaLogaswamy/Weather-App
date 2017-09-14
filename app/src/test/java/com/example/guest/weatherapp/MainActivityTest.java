@@ -4,6 +4,9 @@ import android.content.Intent;
 import android.os.Build;
 import android.widget.TextView;
 
+import com.example.guest.weatherapp.ui.ForecastActivity;
+import com.example.guest.weatherapp.ui.MainActivity;
+
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;

@@ -1,4 +1,4 @@
-package com.example.guest.weatherapp;
+package com.example.guest.weatherapp.models;
 
 /**
  * Created by michaeldunlap on 9/13/17.

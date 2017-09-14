@@ -3,6 +3,8 @@ package com.example.guest.weatherapp;
 import android.support.test.rule.ActivityTestRule;
 import android.view.View;
 
+import com.example.guest.weatherapp.ui.ForecastActivity;
+
 import org.junit.Rule;
 import org.junit.Test;
 

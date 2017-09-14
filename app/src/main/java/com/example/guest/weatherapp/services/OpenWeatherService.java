@@ -1,6 +1,9 @@
-package com.example.guest.weatherapp;
+package com.example.guest.weatherapp.services;
 
 import android.util.Log;
+
+import com.example.guest.weatherapp.Constants;
+import com.example.guest.weatherapp.models.ForecastDay;
 
 import org.json.JSONArray;
 import org.json.JSONException;
